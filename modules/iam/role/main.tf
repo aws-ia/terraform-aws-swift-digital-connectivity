@@ -1,5 +1,5 @@
 resource "aws_iam_role" "role" {
-  name = var.name
+  name                 = var.name
   permissions_boundary = var.permissions_boundary
   assume_role_policy = jsonencode(
     {

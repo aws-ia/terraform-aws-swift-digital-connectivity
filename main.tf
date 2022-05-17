@@ -70,48 +70,48 @@ module "amh_functional_role" {
     "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore",
   ]
   policy = jsonencode(
-  {
-    "Version" : "2012-10-17"
-    "Statement" : [
-      {
-        "Action" : "s3:GetObject",
-        "Effect" : "Allow",
-        "Resource" : [
-          "arn:aws:s3:::aws-quickstart-eu-west-1/*",
-          "arn:aws:s3:::amazoncloudwatch-agent-eu-west-1/*",
-          "arn:aws:s3:::aws-ssm-eu-west-1/*",
-          "arn:aws:s3:::aws-windows-downloads-eu-west-1/*",
-          "arn:aws:s3:::amazon-ssm-eu-west-1/*",
-          "arn:aws:s3:::amazon-ssm-packages-eu-west-1/*",
-          "arn:aws:s3:::eu-west-1-birdwatcher-prod/*",
-          "arn:aws:s3:::aws-ssm-distributor-file-eu-west-1/*",
-          "arn:aws:s3:::patch-baseline-snapshot-eu-west-1/*"
-        ],
-        "Sid" : "SSMPermissionsPolicyForSSMandCWAgent"
-      },
-      {
-        "Action" : [
-          "cloudwatch:PutMetricData",
-          "ec2:DescribeVolumes",
-          "ec2:DescribeTags",
-          "logs:PutLogEvents",
-          "logs:DescribeLogStreams",
-          "logs:DescribeLogGroups",
-          "logs:CreateLogStream",
-          "logs:CreateLogGroup"
-        ],
-        "Effect" : "Allow",
-        "Resource" : "*",
-        "Sid" : "CWAgentPermissions"
-      },
-      {
-        "Action" : "ssm:GetParameter",
-        "Effect" : "Allow",
-        "Resource" : "arn:aws:ssm:*:*:parameter/AmazonCloudWatch-*",
-        "Sid" : "SSMParameterStorePermissions"
-      }
-    ],
-  }
+    {
+      "Version" : "2012-10-17"
+      "Statement" : [
+        {
+          "Action" : "s3:GetObject",
+          "Effect" : "Allow",
+          "Resource" : [
+            "arn:aws:s3:::aws-quickstart-eu-west-1/*",
+            "arn:aws:s3:::amazoncloudwatch-agent-eu-west-1/*",
+            "arn:aws:s3:::aws-ssm-eu-west-1/*",
+            "arn:aws:s3:::aws-windows-downloads-eu-west-1/*",
+            "arn:aws:s3:::amazon-ssm-eu-west-1/*",
+            "arn:aws:s3:::amazon-ssm-packages-eu-west-1/*",
+            "arn:aws:s3:::eu-west-1-birdwatcher-prod/*",
+            "arn:aws:s3:::aws-ssm-distributor-file-eu-west-1/*",
+            "arn:aws:s3:::patch-baseline-snapshot-eu-west-1/*"
+          ],
+          "Sid" : "SSMPermissionsPolicyForSSMandCWAgent"
+        },
+        {
+          "Action" : [
+            "cloudwatch:PutMetricData",
+            "ec2:DescribeVolumes",
+            "ec2:DescribeTags",
+            "logs:PutLogEvents",
+            "logs:DescribeLogStreams",
+            "logs:DescribeLogGroups",
+            "logs:CreateLogStream",
+            "logs:CreateLogGroup"
+          ],
+          "Effect" : "Allow",
+          "Resource" : "*",
+          "Sid" : "CWAgentPermissions"
+        },
+        {
+          "Action" : "ssm:GetParameter",
+          "Effect" : "Allow",
+          "Resource" : "arn:aws:ssm:*:*:parameter/AmazonCloudWatch-*",
+          "Sid" : "SSMParameterStorePermissions"
+        }
+      ],
+    }
   )
 }
 

@@ -21,12 +21,12 @@ variable "database_subnet_ids" {
 # }
 
 variable "vpc_id" {
-  type = string
+  type        = string
   description = "ID of target VPC"
 }
 
 variable "ssh_key_name" {
-  type = string
+  type        = string
   description = "Name of the key to use as a default SSH key for AMH instance"
 }
 
@@ -43,7 +43,7 @@ variable "ssh_key_name" {
 # }
 
 variable "workstation_ip_range" {
-  type = string
+  type        = string
   default     = "10.1.0.0/16"
   description = "Range of IPS for administrator workstations"
 }
@@ -61,11 +61,11 @@ variable "workstation_ip_range" {
 # }
 
 variable "amh_kms_key" {
-  type = string
+  type        = string
   description = "ARN to the key used for encrypting AMH instance volumes"
 }
 
 variable "database_kms_key" {
-  type = string
+  type        = string
   description = "ARN to the key used for encrypting RDS database"
 }

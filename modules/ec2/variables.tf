@@ -5,7 +5,7 @@ variable "security_group_ids" {
 variable "ssh_key_name" {}
 variable "instance_type" { default = "m5.xlarge" }
 variable "volume_size" { default = 100 }
-variable "volume_type" { default = "gp3"}
+variable "volume_type" { default = "gp3" }
 variable "kms_key" {}
 variable "tags" {
   type    = map(any)

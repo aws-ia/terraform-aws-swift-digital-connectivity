@@ -6,11 +6,11 @@ provider "awscc" {
 data "aws_availability_zones" "available" {}
 
 module "workload_vpc" {
-  source               = "aws-ia/vpc/aws"
-  version = ">= 1.0.0"
-  name                 = "workload-vpc"
-  cidr_block                 = "10.0.0.0/16"
-  az_count       = 3
+  source     = "aws-ia/vpc/aws"
+  version    = ">= 1.0.0"
+  name       = "workload-vpc"
+  cidr_block = "10.0.0.0/16"
+  az_count   = 3
 
   subnets = {
     public = {
@@ -51,10 +51,10 @@ resource "aws_kms_key" "amh" {
 module "basic_swift_connectivity" {
   source = "../../"
 
-  vpc_id                        = module.workload_vpc.vpc_attributes.id
-  ssh_key_name                  = aws_key_pair.generated_key.key_name
-  amh_kms_key                   = aws_kms_key.amh.arn
-  database_kms_key              = aws_kms_key.database.arn
-  amh_subnet_ids = [ for az, subnet in module.workload_vpc.vpc_attributes.public_subnet_attributes_by_az : subnet.id ]
-  database_subnet_ids = [ for az, subnet in module.workload_vpc.vpc_attributes.private_subnet_attributes_by_az : subnet.id ]
+  vpc_id              = module.workload_vpc.vpc_attributes.id
+  ssh_key_name        = aws_key_pair.generated_key.key_name
+  amh_kms_key         = aws_kms_key.amh.arn
+  database_kms_key    = aws_kms_key.database.arn
+  amh_subnet_ids      = [for az, subnet in module.workload_vpc.vpc_attributes.public_subnet_attributes_by_az : subnet.id]
+  database_subnet_ids = [for az, subnet in module.workload_vpc.vpc_attributes.private_subnet_attributes_by_az : subnet.id]
 }

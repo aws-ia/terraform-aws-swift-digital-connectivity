@@ -1,6 +1,6 @@
 resource "aws_security_group" "sg" {
-  name    = var.name
-  vpc_id  = var.vpc_id
+  name   = var.name
+  vpc_id = var.vpc_id
   ingress = [
     for x in var.ingress_rules : {
       cidr_blocks      = lookup(x, "cidr_blocks", null)

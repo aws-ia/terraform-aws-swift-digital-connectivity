@@ -5,7 +5,7 @@ variable "region" {
 }
 
 variable "key_name" {
-  type = string
-  default = "swift"
+  type        = string
+  default     = "swift"
   description = "The name of the SSH key"
 }
