@@ -55,6 +55,6 @@ module "basic_swift_connectivity" {
   ssh_key_name        = aws_key_pair.generated_key.key_name
   amh_kms_key         = aws_kms_key.amh.arn
   database_kms_key    = aws_kms_key.database.arn
-  amh_subnet_ids      = [for az, subnet in module.workload_vpc.vpc_attributes.public_subnet_attributes_by_az : subnet.id]
-  database_subnet_ids = [for az, subnet in module.workload_vpc.vpc_attributes.private_subnet_attributes_by_az : subnet.id]
+  amh_subnet_ids      = [for az, subnet in module.workload_vpc.public_subnet_attributes_by_az : subnet.id]
+  database_subnet_ids = [for az, subnet in module.workload_vpc.private_subnet_attributes_by_az : subnet.id]
 }
