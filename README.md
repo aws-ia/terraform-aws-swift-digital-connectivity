@@ -1,30 +1,12 @@
-## Requirements
+# Introduction
 
-| Name | Version |
-|------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 0.14.0 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 3.72.0 |
-| <a name="requirement_awscc"></a> [awscc](#requirement\_awscc) | >= 0.9.0 |
+The repository provides an example for running SWIFT CSP compliant environment using Terraform to provision all resources.
 
-## Providers
+The Terraform code is based on SWIFT Quickstart template (https://aws.amazon.com/quickstart/architecture/swift-client-connectivity/) with the following changes and assumptions:
 
-No providers.
-
-## Modules
-
-No modules.
-
-## Resources
-
-No resources.
-
-## Inputs
-
-No inputs.
-
-## Outputs
-
-No outputs.
+* The code uses existing VPC - high security environments usually have VPC already provisioned, the template reuses it.
+* The code doesn't manage NACL rules - customers have dedicated teams that manage both VPC as well as routing and firewall settings.
+* The template supports deployment of AMH component and its database, all other components (like MQ) should be provisioned separately
 
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
