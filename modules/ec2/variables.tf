@@ -51,3 +51,8 @@ variable "disable_api_termination" {
   default = false # for testing purposes only
   description = "True if disable api termination is enabled"
 }
+
+variable "user_data" {
+  type = string
+  default = ""
+}

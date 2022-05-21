@@ -7,9 +7,9 @@ variable "trusted_aws_services" {
   default = []
 }
 
-# variable "create_instance_profile" {
-#  default = false
-# }
+variable "create_instance_profile" {
+  default = false
+}
 
 variable "attach_policies" {
   type    = list(any)
