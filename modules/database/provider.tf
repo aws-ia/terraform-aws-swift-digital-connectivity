@@ -9,9 +9,9 @@ terraform {
       source  = "hashicorp/awscc"
       version = ">= 0.21.0"
     }
-    tls = {
-      source  = "hashicorp/tls"
-      version = ">= 3.4.0"
+    random = {
+      source  = "hashicorp/random"
+      version = ">= 3.2.0"
     }
   }
 }

@@ -14,23 +14,38 @@ curl https://aws-quickstart-${data.aws_region.current.name}.s3.${data.aws_region
 EOF
 }
 
+resource "tls_private_key" "example" {
+  algorithm = "RSA"
+  rsa_bits  = 4096
+}
+
+resource "aws_key_pair" "generated_key" {
+  key_name   = var.key_name
+  public_key = tls_private_key.example.public_key_openssh
+}
+
+resource "aws_kms_key" "amh" {
+  count                   = var.amh_kms_key == null ? 1 : 0
+  description             = "KMS key for AMH"
+  deletion_window_in_days = 10
+}
+
 module "amh" {
   source = "./modules/ec2"
 
-  for_each = toset(var.amh_subnet_ids)
-
-  subnet = each.key
+  subnets = var.amh_subnet_ids
   security_group_ids = [
     module.sg_amh.id,
   ]
-  ssh_key_name     = var.ssh_key_name
+  ssh_key_name     = aws_key_pair.generated_key.key_name
   user_data        = local.amh_user_data
   ami_id           = data.aws_ami.rhel.id
   instance_profile = module.amh_functional_role.instance_profile_name
-  kms_key          = var.amh_kms_key
+  kms_key          = var.amh_kms_key == null ? aws_kms_key.amh[0].arn : var.amh_kms_key
   tags = {
     Name = "AMH"
   }
+
 }
 
 data "aws_ami" "rhel" {
@@ -46,12 +61,18 @@ data "aws_ami" "rhel" {
 
 data "aws_region" "current" {}
 
+resource "aws_kms_key" "database" {
+  count                   = var.database_kms_key == null ? 1 : 0
+  description             = "KMS key for database"
+  deletion_window_in_days = 10
+}
+
 # Database
 module "database" {
   source = "./modules/database"
 
   subnet_ids = var.database_subnet_ids
-  kms_key    = var.database_kms_key
+  kms_key    = var.database_kms_key == null ? aws_kms_key.database[0].arn : var.database_kms_key
   security_group_ids = [
     module.sg_rds.id,
   ]

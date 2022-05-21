@@ -4,8 +4,14 @@ variable "region" {
   description = "What AWS region to deploy resources in."
 }
 
-variable "key_name" {
+variable "az_count" {
+  type        = number
+  default     = 2
+  description = "The number of az's to deploy in"
+}
+
+variable "vpc_id" {
   type        = string
-  default     = "swift"
-  description = "The name of the SSH key"
+  description = "ID of target VPC"
+  default     = null
 }

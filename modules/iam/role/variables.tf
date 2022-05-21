@@ -1,14 +1,26 @@
-variable "name" {}
+variable "name" {
+  type = string
+}
+
 variable "trusted_aws_services" {
   type    = list(any)
   default = []
 }
-variable "create_instance_profile" {
-  default = false
-}
+
+# variable "create_instance_profile" {
+#  default = false
+# }
+
 variable "attach_policies" {
   type    = list(any)
   default = []
 }
-variable "policy" {}
-variable "permissions_boundary" { default = "" }
+
+variable "policy" {
+  type = string
+}
+
+variable "permissions_boundary" {
+  type    = string
+  default = ""
+}

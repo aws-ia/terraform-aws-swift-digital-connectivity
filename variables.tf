@@ -1,10 +1,12 @@
 variable "amh_subnet_ids" {
-  type        = list(any)
+  type = map(object({
+    subnet_id = string
+  }))
   description = "List of subnet IDs for AMH EC2 instances"
 }
 
 variable "database_subnet_ids" {
-  type        = list(any)
+  type        = list(string)
   description = "List of subnet IDs for RDS database"
 }
 
@@ -23,11 +25,7 @@ variable "database_subnet_ids" {
 variable "vpc_id" {
   type        = string
   description = "ID of target VPC"
-}
-
-variable "ssh_key_name" {
-  type        = string
-  description = "Name of the key to use as a default SSH key for AMH instance"
+  default     = ""
 }
 
 # variable "swift_ip_range" {
@@ -63,9 +61,17 @@ variable "workstation_ip_range" {
 variable "amh_kms_key" {
   type        = string
   description = "ARN to the key used for encrypting AMH instance volumes"
+  default     = null
 }
 
 variable "database_kms_key" {
   type        = string
   description = "ARN to the key used for encrypting RDS database"
+  default     = null
+}
+
+variable "key_name" {
+  type        = string
+  default     = "swift"
+  description = "The name of the SSH key"
 }

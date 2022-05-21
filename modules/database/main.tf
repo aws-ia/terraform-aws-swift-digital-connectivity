@@ -20,7 +20,7 @@ EOF
 }
 
 resource "aws_secretsmanager_secret" "master" {
-  name = "amh-rds-database-master"
+  name_prefix = "amh-rds-database-master"
 }
 
 resource "aws_db_instance" "name" {
@@ -29,7 +29,7 @@ resource "aws_db_instance" "name" {
   instance_class         = var.instance_class
   db_subnet_group_name   = aws_db_subnet_group.group.name
   engine                 = "oracle-ee"
-  engine_version         = "12.2.0.1.ru-2020-07.rur-2020-07.r1"
+  engine_version         = "19.0.0.0.ru-2021-10.rur-2021-10.r1"
   kms_key_id             = var.kms_key
   username               = var.username
   password               = random_password.master.result
