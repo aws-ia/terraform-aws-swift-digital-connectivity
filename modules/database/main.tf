@@ -38,6 +38,7 @@ resource "aws_db_instance" "name" {
   storage_encrypted      = true
   storage_type           = "gp2"
   vpc_security_group_ids = var.security_group_ids
+  skip_final_snapshot    = true // for testing only - https://github.com/hashicorp/terraform-provider-aws/issues/92#issuecomment-626289241
   enabled_cloudwatch_logs_exports = [
     "trace",
     "audit",
