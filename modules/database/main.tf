@@ -1,14 +1,3 @@
-variable "subnet_ids" {
-  type = list(any)
-}
-variable "instance_class" { default = "db.m5.large" }
-variable "allocated_storage" { default = 100 }
-variable "kms_key" {}
-variable "security_group_ids" {
-  type = list(any)
-}
-variable "username" { default = "admin" }
-
 resource "aws_db_subnet_group" "group" {
   description = "subnet group for AMH RDS Oracle instance"
   subnet_ids  = var.subnet_ids
@@ -31,7 +20,7 @@ EOF
 }
 
 resource "aws_secretsmanager_secret" "master" {
-  name = "amh-rds-database-master"
+  name_prefix = "amh-rds-database-master"
 }
 
 resource "aws_db_instance" "name" {
@@ -40,7 +29,7 @@ resource "aws_db_instance" "name" {
   instance_class         = var.instance_class
   db_subnet_group_name   = aws_db_subnet_group.group.name
   engine                 = "oracle-ee"
-  engine_version         = "12.2.0.1.ru-2020-07.rur-2020-07.r1"
+  engine_version         = "19.0.0.0.ru-2021-10.rur-2021-10.r1"
   kms_key_id             = var.kms_key
   username               = var.username
   password               = random_password.master.result
@@ -49,6 +38,7 @@ resource "aws_db_instance" "name" {
   storage_encrypted      = true
   storage_type           = "gp2"
   vpc_security_group_ids = var.security_group_ids
+  skip_final_snapshot    = true // for testing only - https://github.com/hashicorp/terraform-provider-aws/issues/92#issuecomment-626289241
   enabled_cloudwatch_logs_exports = [
     "trace",
     "audit",
