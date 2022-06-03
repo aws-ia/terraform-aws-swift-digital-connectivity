@@ -16,14 +16,14 @@ The Terraform code is based on SWIFT Quickstart template (https://aws.amazon.com
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.1 |
 | <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 3.73.0 |
 | <a name="requirement_awscc"></a> [awscc](#requirement\_awscc) | >= 0.21.0 |
-| <a name="requirement_tls"></a> [tls](#requirement\_tls) | >= 3.4.0 |
+| <a name="requirement_tls"></a> [tls](#requirement\_tls) | >= 3.3.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
 | <a name="provider_aws"></a> [aws](#provider\_aws) | 4.14.0 |
-| <a name="provider_tls"></a> [tls](#provider\_tls) | >= 3.4.0 |
+| <a name="provider_tls"></a> [tls](#provider\_tls) | >= 3.3.0 |
 
 ## Modules
 
