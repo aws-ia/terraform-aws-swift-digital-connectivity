@@ -4,6 +4,7 @@ resource "aws_instance" "main" {
   ami                         = var.ami_id
   associate_public_ip_address = false
   disable_api_termination     = var.disable_api_termination
+  http_tokens                 = required
   iam_instance_profile        = var.instance_profile
   instance_type               = var.instance_type
   key_name                    = var.ssh_key_name
