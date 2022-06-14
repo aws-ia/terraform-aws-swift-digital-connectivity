@@ -13,7 +13,7 @@ resource "aws_instance" "main" {
   vpc_security_group_ids      = var.security_group_ids
 
   metadata_options {
-    http_tokens = required
+    http_tokens = "required"
   }
 
   root_block_device {
