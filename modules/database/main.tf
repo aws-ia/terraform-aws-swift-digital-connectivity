@@ -21,6 +21,7 @@ EOF
 
 resource "aws_secretsmanager_secret" "master" {
   name_prefix = "amh-rds-database-master"
+  kms_key_id  = "amh-key"
 }
 
 resource "aws_db_instance" "name" {
@@ -37,6 +38,9 @@ resource "aws_db_instance" "name" {
   multi_az               = true
   storage_encrypted      = true
   storage_type           = "gp2"
+  backup_retention_period = 14
+  performance_insights_enabled  = true
+  performance_insights_kms_key_id = var.kms_key
   vpc_security_group_ids = var.security_group_ids
   skip_final_snapshot    = true # for testing only - https://github.com/hashicorp/terraform-provider-aws/issues/92#issuecomment-626289241
   enabled_cloudwatch_logs_exports = [

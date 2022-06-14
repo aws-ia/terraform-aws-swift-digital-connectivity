@@ -1,5 +1,6 @@
 resource "aws_security_group" "sg" {
   name   = var.name
+  description = "Security Group for AWS"
   vpc_id = var.vpc_id
   ingress = [
     for x in var.ingress_rules : {

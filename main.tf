@@ -28,6 +28,7 @@ resource "aws_kms_key" "amh" {
   count                   = var.amh_kms_key == null ? 1 : 0
   description             = "KMS key for AMH"
   deletion_window_in_days = 10
+  enable_key_rotation     = true
 }
 
 module "amh" {
@@ -65,6 +66,7 @@ resource "aws_kms_key" "database" {
   count                   = var.database_kms_key == null ? 1 : 0
   description             = "KMS key for database"
   deletion_window_in_days = 10
+  enable_key_rotation     = true
 }
 
 # Database
