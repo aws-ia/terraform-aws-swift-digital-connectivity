@@ -11,6 +11,7 @@ variable "AWS_SECRET_ACCESS_KEY" {
 variable "AWS_SESSION_TOKEN" {
   type = string
   description = "The session token for AWS"
+  sensitive = true
 }
 
 variable "tfe_organization" {
