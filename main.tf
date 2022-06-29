@@ -74,6 +74,7 @@ module "database" {
   source = "./modules/database"
 
   subnet_ids = var.database_subnet_ids
+  secrets_key    = var.database_kms_key == null ? aws_kms_key.database[0].arn : var.secrets_key
   kms_key    = var.database_kms_key == null ? aws_kms_key.database[0].arn : var.database_kms_key
   security_group_ids = [
     module.sg_rds.id,

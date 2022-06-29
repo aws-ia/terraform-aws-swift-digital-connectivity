@@ -15,6 +15,11 @@ variable "allocated_storage" {
   description = "Allocated storage for db"
 }
 
+variable "secrets_key" {
+  type        = string
+  description = "KMS key for Secrets Manager"
+}
+
 variable "kms_key" {
   type        = string
   description = "KMS key for db"

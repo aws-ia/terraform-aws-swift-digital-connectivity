@@ -6,40 +6,40 @@ variable "subnets" {
 }
 
 variable "security_group_ids" {
-  type = list(any)
+  type        = list(any)
   description = "List of security group IDs"
 }
 
 variable "ssh_key_name" {
-  type = string
+  type        = string
   description = "Name of the ssh key"
 }
 variable "instance_type" {
-  type    = string
-  default = "m5.xlarge"
+  type        = string
+  default     = "m5.xlarge"
   description = "The type of EC2 instance"
 }
 
 variable "volume_size" {
-  type    = number
-  default = 100
+  type        = number
+  default     = 100
   description = "Volume size to be used"
 }
 
 variable "volume_type" {
-  type    = string
-  default = "gp3"
+  type        = string
+  default     = "gp3"
   description = "Type of EBS volume"
 }
 
 variable "kms_key" {
-  type = string
+  type        = string
   description = "KMS key to be used for encryption"
 }
 
 variable "tags" {
-  type    = map(any)
-  default = {}
+  type        = map(any)
+  default     = {}
   description = "Resource tags for the instance"
 }
 
@@ -61,7 +61,7 @@ variable "disable_api_termination" {
 }
 
 variable "user_data" {
-  type    = string
-  default = ""
+  type        = string
+  default     = ""
   description = "Any other user data to be used for the instance"
 }

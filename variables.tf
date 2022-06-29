@@ -64,6 +64,12 @@ variable "amh_kms_key" {
   default     = null
 }
 
+variable "secrets_key" {
+  type        = string
+  description = "ARN to the key used for Secrets Manager"
+  default     = null
+}
+
 variable "database_kms_key" {
   type        = string
   description = "ARN to the key used for encrypting RDS database"

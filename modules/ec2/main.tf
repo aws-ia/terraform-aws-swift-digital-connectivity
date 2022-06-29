@@ -12,9 +12,9 @@ resource "aws_instance" "main" {
   volume_tags                 = var.tags
   vpc_security_group_ids      = var.security_group_ids
 
-  metadata_options {
-    http_tokens = "required"
-  }
+#  metadata_options {
+#    http_tokens = "required"
+#  }
 
   root_block_device {
     volume_size = var.volume_size

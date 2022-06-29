@@ -17,7 +17,7 @@ resource "aws_iam_role" "role" {
   )
 }
 
-data "aws_iam_policy" "policy" {
+data "aws_iam_policy_document" "iam_policy" {
   dynamic "statement" {
     for_each = var.s3_bucket == null ? [] : [1]
     content {
@@ -44,20 +44,6 @@ data "aws_iam_policy" "policy" {
       "kms:CreateGrant",
       "kms:*crypt"
     ]
-    resources = [
-      var.shared_kms_key_arn,
-      "arn:aws:kms:*:${data.aws_caller_identity.source.account_id}:*/*"
-    ]
-  }
-
-  statement {
-    effect = "Allow"
-    actions = [
-      "secretsmanager:GetSecretValue"
-    ]
-    resources = [
-      "arn:aws:secretsmanager:*:${data.aws_caller_identity.source.account_id}:secret:*${var.app_team}*"
-    ]
   }
 
   statement {
@@ -70,15 +56,19 @@ data "aws_iam_policy" "policy" {
 }
 
 resource "aws_iam_policy" "iam_policy" {
-  name   = local.policy_name
+  name   = var.name
   policy = data.aws_iam_policy_document.iam_policy.json
 }
 
+#resource "aws_iam_policy" "policy" {
+#  name   = var.name
+#  policy = var.policy
+#}
 
-resource "aws_iam_role_policy_attachment" "default" {
-  role       = aws_iam_role.role.name
-  policy_arn = aws_iam_policy.policy.arn
-}
+#resource "aws_iam_role_policy_attachment" "default" {
+#  role       = aws_iam_role.role.name
+#  policy_arn = aws_iam_policy.policy.arn
+#}
 
 resource "aws_iam_role_policy_attachment" "attach" {
   for_each = toset(var.attach_policies)
@@ -88,6 +78,18 @@ resource "aws_iam_role_policy_attachment" "attach" {
 }
 
 resource "aws_iam_instance_profile" "profile" {
-  name = var.name
+#  name = var.name
   role = aws_iam_role.role.name
+}
+
+output "arn" {
+  value = aws_iam_role.role.arn
+}
+
+output "instance_profile_arn" {
+  value = aws_iam_instance_profile.profile.arn
+}
+
+output "instance_profile_name" {
+  value = aws_iam_instance_profile.profile.name
 }
