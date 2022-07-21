@@ -1,4 +1,5 @@
-# AMH
+# AMH - this main.tf file serves as an example or blueprint for a customer's AMH deployment
+# all resources below are listed as examples and should be reviewed carefully for each customers' environment
 locals {
   amh_user_data = <<EOF
 #!/bin/sh
@@ -14,6 +15,7 @@ curl https://aws-quickstart-${data.aws_region.current.name}.s3.${data.aws_region
 EOF
 }
 
+# This resource should be stored in the user's TFSTAT file and should be encrypted
 resource "tls_private_key" "example" {
   algorithm = "RSA"
   rsa_bits  = 4096
