@@ -40,3 +40,7 @@ terraform.rc
 
 .pre-commit-config.yaml
 .editorconfig
+
+# IDE workspace settings
+.vscode/
+.idea/
